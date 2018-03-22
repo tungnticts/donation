@@ -36,4 +36,28 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    protected function credentials(Request $request)
+    {
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+            ? $this->username()
+            : 'username';
+
+        return [
+            $field => $request->get($this->username()),
+            'password' => $request->password,
+        ];
+    }
+    public function login(Request $request) {
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        if( Auth::attempt(['email' => $email, 'password' =>$password])) {
+           echo 11;
+            //return redirect()->intended('/');
+        } else {
+            echo 22;
+            $errors = new MessageBag(['errorlogin' => 'Email hoặc mật khẩu không đúng']);
+            return redirect()->back()->withInput()->withErrors($errors);
+        }
+    }
 }

@@ -12,3 +12,13 @@
 */
 
 Route::get('/', 'HomeController@index');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/login', 'UserController@login')->name('login');
+Route::get('/logout', 'UserController@logout')->name('logout');
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/projects', 'ProjectController@index')->name('project.list');
