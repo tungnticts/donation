@@ -14,8 +14,17 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="http://themes.getbootstrap.com/preview/assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/material-desgin.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/material-desgin.css') }}"><link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('lib/color_picker/jPicker.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/perfect-scrollbar.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+    <script src="{{ asset('lib/color_picker/jpicker-1.1.6.min.js') }}"></script>
 </head>
 <body>
     <div class="be-wrapper be-fixed-sidebar">
@@ -105,32 +114,7 @@
                   <li class="divider">Menu</li>
                   <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                   </li>
-                  <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>UI Elements</span></a>
-                    <ul class="sub-menu">
-                      <li><a href="ui-alerts.html">Alerts</a>
-                      </li>
-                      <li><a href="ui-buttons.html">Buttons</a>
-                      </li>
-                      <li><a href="ui-panels.html">Panels</a>
-                      </li>
-                      <li><a href="ui-general.html">General</a>
-                      </li>
-                      <li><a href="ui-modals.html">Modals</a>
-                      </li>
-                      <li><a href="ui-notifications.html">Notifications</a>
-                      </li>
-                      <li><a href="ui-icons.html">Icons</a>
-                      </li>
-                      <li><a href="ui-grid.html">Grid</a>
-                      </li>
-                      <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a>
-                      </li>
-                      <li><a href="ui-nestable-lists.html">Nestable Lists</a>
-                      </li>
-                      <li><a href="ui-typography.html">Typography</a>
-                      </li>
-                    </ul>
-                  </li>
+                <li class="parent"><a href="{{ route('product.product_list') }}"><i class="icon mdi mdi-face"></i><span>Danh sách sản phẩm</span></a></li>
                   <li class="parent"><a href="charts.html"><i class="icon mdi mdi-chart-donut"></i><span>Charts</span></a>
                     <ul class="sub-menu">
                       <li><a href="charts-flot.html">Flot</a>
@@ -314,10 +298,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/layout.js') }}"></script>
 </body>
 </html>
