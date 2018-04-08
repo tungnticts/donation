@@ -4,18 +4,24 @@
 <div class="row">
     <h2 class="col-md-12 card-title" style="margin-top:0.75rem;">{{ $project->name }}</h2>
 </div>
-<div class="row">
+<div class="row" style="margin-bottom: 10px;">
     <div class="col-md-6">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="d-block w-100" src="{{ $project->thumbnail }}" alt="First slide">
+                    <img class="d-block w-100" src="{{ $project->image1  }}" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="{{ asset('images/default.jpg') }}" alt="Second slide">
+                    <img class="d-block w-100" src="{{$project->image2  }}" alt="Third slide">
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src="{{ asset('images/default.jpg') }}" alt="Third slide">
+                    <img class="d-block w-100" src="{{ $project->image3  }}" alt="Fo slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ $project->image4 }}" alt="Third slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{{ $project->image5  }}" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

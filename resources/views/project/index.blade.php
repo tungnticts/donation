@@ -40,7 +40,7 @@
                 <p class="card-text">{!! $project->summary !!} </p>
                 <div class="row margin_bottom_10">
                     <span class="col-md-8">{{ number_format($project->aim_money) }} VND</span>
-                    <span class="col-md-4 text_right">{{ $total_money/$project->aim_money * 100 }}%</span>
+                    <span class="col-md-4 text_right">{{ round($total_money/$project->aim_money, 2) * 100 }}%</span>
                 </div>
                 <div class="progress margin_bottom_10">
                     <div class="progress-bar bg-success" role="progressbar" style="width: {{ $total_money/$project->aim_money * 100 }}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>

@@ -54,4 +54,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/packages/create', 'ProjectController@create_package')->name('project.create_package')->middleware('auth');
     Route::post('/packages/store', 'ProjectController@store_package')->name('project.store_package')->middleware('auth');
     Route::get('/packages', 'ProjectController@packages_list')->name('project.packages_list')->middleware('auth');
+    Route::get('/orders', 'OrderController@index')->name('project.index')->middleware('auth');
 });

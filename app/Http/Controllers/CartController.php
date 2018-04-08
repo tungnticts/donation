@@ -57,7 +57,6 @@ class CartController extends Controller
         $order->phone_number = $request->input('phone_number');
         $order->payment_type = $request->input('payment_method'); // 0: vtcPay, 1: thẻ nội địa, 2: thẻ quốc tế visa - master
         $order->payment_status = 0;
-        $order->status = 0;
         $order->total_price = $request->input('total_price');
         $order->status = 0; // 0: mặc định tạo đơn hàng, sẽ thay đổi khi vtc pay trả về trạng thái. Dựa theo trạng thái được vtc pay định nghĩa trong document http://sandbox3.vtcebank.vn/VTCDocuments/TaiLieuTichHopWebSite_V2.html
         $order->quantity = 1;
@@ -125,7 +124,7 @@ class CartController extends Controller
 
         $order->message = $request->input('message');
         $order->trans_ref_no = $request->input('trans_ref_no');
-        $order->status = $request->input('status');
+        $order->payment_status = $request->input('status');
         $order->save();
 
         return redirect('/projects')->with('success', 'Thanh toán thành công');

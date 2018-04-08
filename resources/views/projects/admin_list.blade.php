@@ -23,6 +23,11 @@
                 @endif
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: right;">
+                <a href="{{ route('project.create') }}" class="btn btn-primary">Tạo project</a>
+            </div>
+        </div>
         <div class="col-sm-12">
             <table id="table1" class="table table-striped table-hover table-fw-widget dataTable no-footer" role="grid" aria-describedby="table1_info">
                 <thead>
@@ -48,6 +53,7 @@
                         <td class="center">{{ $project->created_at }}</td>
                         <td class="action">
                             <a href="{{ route('project.edit', [ $project->id ]) }}" style="margin-right: 10px"><i class="mdi mdi-settings" style="font-size: 20px;"></i></a>
+                            <a href="{{ route('project.packages_list', [ 'project_id' => $project->id ]) }}" class="btn btn-primary btn-sm" style="margin-right: 10px">Packages</a>
                         </td>
                     </tr>
                     @endforeach

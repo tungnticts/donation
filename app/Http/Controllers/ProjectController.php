@@ -53,6 +53,11 @@ class ProjectController extends Controller
             'summary' => 'required',
             'content' => 'required',
             'thumbnail' => 'required',
+            'image1' => 'required',
+            'image2' => 'required',
+            'image3' => 'required',
+            'image4' => 'required',
+            'image5' => 'required',
             'end_at' => 'required',
         ]);
 
@@ -67,9 +72,14 @@ class ProjectController extends Controller
         $project->thumbnail = $request->input('thumbnail');
         $project->end_at = $request->input('end_at');
         $project->user_id = Auth::id();
+        $project->image1 = $request->input('image1');
+        $project->image2 = $request->input('image2');
+        $project->image3 = $request->input('image3');
+        $project->image4 = $request->input('image4');
+        $project->image5 = $request->input('image5');
         $project->save();
 
-        return redirect('admin/projects')->with('success', 'Tạo dự án thành công !!!');   
+        return redirect('admin/packages/create?project_id='.$project->id.'&quantity='.$request->input('package_number'))->with('success', 'Tạo dự án thành công !!!');   
     }
     public function edit($id) {
         $project = Project::findOrFail($id);

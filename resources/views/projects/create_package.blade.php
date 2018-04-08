@@ -26,7 +26,7 @@
         <form action="/admin/packages/store" method="POST" enctype="multipart/form-data">
           {{csrf_field()}}
             <input type="hidden" name="project_id" value="{{ $project->id }}" />
-        @for($i = 1; $i <= 3; $i++)
+        @for($i = 1; $i <= $quantity; $i++)
             <div class="form-group row">
               <label for="inputText3" class="col-12 col-sm-3 col-form-label text-sm-right">Tiêu đề gói</label>
               <div class="col-12 col-sm-8 col-lg-6">
