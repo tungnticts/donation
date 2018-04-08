@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card card-table">
-    <div class="card-header card-header-divider">Tạo sản phẩm mới</div>
+    <div class="card-header card-header-divider">Tạo chuyên mục mới</div>
     <div class="card-body" style="padding:10px;">    
         @if ($errors->any())
         <div class="row justify-content-center">

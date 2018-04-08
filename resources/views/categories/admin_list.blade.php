@@ -27,6 +27,7 @@
             <table id="table1" class="table table-striped table-hover table-fw-widget dataTable no-footer" role="grid" aria-describedby="table1_info">
                 <thead>
                     <tr role="row">
+                        <th class="center" style="width: 15px;">No.</th>
                         <th class="sorting" style="width:150px">Ảnh</th>
                         <th class="sorting_asc" style="width:35%">Tiêu đề</th>
                         <th class="number">Số lượng sản phẩm</th>
@@ -37,6 +38,7 @@
                 <tbody>
                     @foreach($categories as $key => $category)
                     <tr class="gradeA odd" role="row">
+                        <td>{{ $key + 1 }}</td>
                         <td><img class="img-thumbnail" style="width: 130px" src="{{ $category->thumbnail }}"/></td>
                         <td class="sorting_1">
                             <p style="font-weight:500;">{{ $category->title }}</p>
@@ -45,8 +47,8 @@
                         <td class="number">{{ $category->totalProduct }}</td>
                         <td class="center">{{ $category->created_at }}</td>
                         <td class="action">
-                            {{-- <a href="{{ route('product.edit', [ $product->id ]) }}" style="margin-right: 10px"><i class="mdi mdi-settings"></i></a>
-                            <a href="{{ route('product.delete', [ $product->id ]) }}"><i class="mdi mdi-delete"></i></a> --}}
+                            <a href="{{ route('category.edit', [ $category->id ]) }}" style="margin-right: 10px"><i class="mdi mdi-settings" style="font-size:20px"></i></a>
+                            <a href="{{ route('category.delete', [ $category->id ]) }}"><i class="mdi mdi-delete" style="font-size:20px"></i></a>
                         </td>
                     </tr>
                     @endforeach

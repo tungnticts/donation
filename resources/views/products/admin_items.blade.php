@@ -21,13 +21,33 @@
 							</div>
 					</div>
 					@endif
+					@if ($errors->all())
+					@foreach ($errors->all() as $error)
+						<div role="alert" class="alert alert-warning alert-icon alert-icon-border alert-dismissible">
+								<div class="icon"><span class="mdi mdi-alert-triangle"></span></div>
+								<div class="message">
+										<button type="button" data-dismiss="alert" aria-label="Close" class="close">
+												<span aria-hidden="true" class="mdi mdi-close"></span>
+										</button>{{ $error }}
+								</div>
+						</div>
+						@endforeach
+						@endif
 			</div>
 	</div>
 	<div class="row justify-content-center">
-		<div class="col-sm-8">
+		<div class="col-sm-4">
 			<span class="badge badge-secondary">Còn: {{ $array_total[0] }} chiếc</span>
 			<span class="badge badge-success">Đã bán: {{ $array_total[1] }} chiếc</span>
 			<span class="badge badge-warning">Đặt: {{ $array_total[2] }} chiếc</span>
+		</div>
+		<div class="col-sm-4" style="text-align: right;">
+			<form action="/admin/items/store" method="POST" enctype="multipart/form-data">
+				{{csrf_field()}}
+				<input id="file-1" name="file"  class="inputfile" type="file">
+				<label for="file-1" class="btn-primary"> <i class="mdi mdi-upload"></i><span>Browse files...</span></label>
+				<button class="btn btn-warning" type="submit">Upload</button>
+			</form>
 		</div>
 	</div>
 	<div class="row justify-content-center">
@@ -41,6 +61,7 @@
 									<th class="number">Size</th>
 									<th class="number">Trạng thái</th>
 									<th class="sorting">Ngày nhập</th>
+									<th></th>
 									<th></th>
 								</tr>
 						</thead>
@@ -67,6 +88,11 @@
 									<td class="action">
 											<a href="{{ route('product.edit', [ $item->id ]) }}" style="margin-right: 10px"><i class="mdi mdi-settings"></i></a>
 											<a href="{{ route('product.delete', [ $item->id ]) }}"><i class="mdi mdi-delete"></i></a>
+									</td>
+									<td>
+										<p style="margin:0 0 5px"><a href="{{ route('product.change_status_item', [ 'id' => $item->id, 'status' => 0 ]) }}" style="margin-right: 10px" class="btn btn-secondary btn-xs">Set Stock</a></p>
+										<p style="margin:0 0 5px"><a href="{{ route('product.change_status_item', [ 'id' => $item->id, 'status' => 1 ]) }}" style="margin-right: 10px" class="btn btn-success btn-xs">Set Sold</a></p>
+										<p style="margin:0 0 5px"><a href="{{ route('product.change_status_item', [ 'id' => $item->id, 'status' => 2 ]) }}" style="margin-right: 10px" class="btn btn-warning btn-xs">Set Booked</a></p>
 									</td>
 								</tr>
 								@endforeach

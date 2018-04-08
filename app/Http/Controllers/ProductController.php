@@ -12,6 +12,8 @@ use App\Category;
 use App\ProductInCategory;
 use App\Item;
 use DB;
+use Excel;
+
 class ProductController extends Controller
 {
     public function __construct()
@@ -23,13 +25,42 @@ class ProductController extends Controller
         return view('product.list');
     }
 
-    public function admin_product_list() {
-        $products = Product::orderBy('created_at', 'desc')->paginate(15);
-        foreach($products as $key => $product) {
-            $products[$key]['categories'] = Product::categories($product->id);
-            $products[$key]['packages'] = Product::packages($product->id);
+    public function admin_product_list(Request $request) {
+        if ($request->input('title')) {
+            $title = $request->old('title');
         }
-        return view('products.admin_list', ["products" => $products]);
+        if ($request->input('code')) {
+            $code = $request->old('code');
+        }
+        if ($request->input('category')) {
+            $products = Product::join('products_in_categories', 'products.id', '=', 'products_in_categories.product_id')
+                            ->where(function($query) use ($request) {
+                                if ($request->input('title')) {
+                                    $query->orWhere('products.title', 'like', '%'.$request->input('title').'%');
+                                }
+                                if ($request->input('code')) {
+                                    $query->orWhere('products.code', 'like', '%'.$request->input('code').'%');
+                                }
+                                if ($request->input('category')) {
+                                    $query->orWhere('products_in_categories.category_id', '=', $request->input('category'));
+                                }
+                            })->orderBy('products.id', 'desc')->paginate(15);
+        } else {
+            $products = Product::where(function($query) use ($request) {
+                                if ($request->input('title')) {
+                                    $query->orWhere('products.title', 'like', '%'.$request->input('title').'%');
+                                }
+                                if ($request->input('code')) {
+                                    $query->orWhere('products.code', 'like', '%'.$request->input('code').'%');
+                                }
+                            })->orderBy('products.id', 'desc')->select('id as product_id', 'title', 'price', 'summary', 'thumbnail', 'created_at', 'type', 'color', 'material', 'code', 'sex')->paginate(15);
+        }
+        foreach($products as $key => $product) {
+            $products[$key]['categories'] = Product::categories($product->product_id);
+            $products[$key]['packages'] = Product::packages($product->product_id);
+        }
+        $categories = Category::all();
+        return view('products.admin_list', ["products" => $products, 'categories' => $categories]);
     }
     // public function admin_search()
     public function admin_create_product(Request $request) {
@@ -58,15 +89,10 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'price' => 'required|numeric',
-            // 'quantity' => 'required|numeric',
             'summary' => 'required',
             'categories' => 'required',
             'file' => 'required|image',
             'code' => 'required',
-           // 'type' => 'required|numeric',
-            // 'size' => 'required|numeric',
-           // 'color' => 'required',
-           // 'material' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -151,15 +177,66 @@ class ProductController extends Controller
             return back()->with('fail', 'Sản phẩm không tồn tại !!!');
         }
         $product->delete();
+        ProductInCategory::where('product_id', '=', $id)->delete();
         return back()->with('success', 'Xóa thành công !!!');
     }
-    public function admin_items() {
-        $items = Item::orderBy('created_at', 'desc')->paginate(15);
+    public function admin_items($product_id) {
+        $items = Item::where('product_id', $product_id)->orderBy('id', 'desc')->paginate(15);
         $array_total = array(
             Item::total_item_by_status(0),
             Item::total_item_by_status(1),
             Item::total_item_by_status(2),
         );
         return view('products.admin_items', ['items' => $items, 'array_total' => $array_total]);
+    }
+    public function store_items(Request $request) {
+        // dd($request->file('file'));
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimetypes:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('admin/items')->withErrors($validator)->withInput();
+        }
+        if ($request->file('file')) {
+            $path = $request->file('file')->store('excel');
+            $rows = Excel::load('storage/app/'.$path, function($reader) {
+               $reader->takeColumns(2)->toArray();
+            })->get();
+
+            foreach ($rows as $item) {
+                if ($item->product_id && $item->size) {
+                    $save = new Item();
+                    $save->product_id = $item->product_id;
+                    $save->size = $item->size;
+                    $save->status = 0;
+                    $save->save();
+                }
+            }
+        }
+        return redirect('admin/items')->with('success', 'Upload thành công !!!'); 
+    }
+    public function change_status_item(Request $request) {
+        // dd($request->query('query'));
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|numeric',
+            'status' => 'required|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('admin/items')->withErrors($validator)->withInput();
+        }
+
+        $item = Item::where('id', '=', $request->query('id'))->first();
+        if (!$item) {
+            return back()->with('fail', 'Sản phẩm không tồn tại !!!');
+        }
+        $check = [0, 1, 2];
+        if (!in_array($request->query('status'), $check)) {
+            return back()->with('fail', 'Trạng thái không tồn tại !!!');
+        }
+        $item->status = $request->query('status');
+        $item->save();
+        return back()->with('success', 'Đổi trạng thái của sản phẩm thành công !!!');
     }
 }

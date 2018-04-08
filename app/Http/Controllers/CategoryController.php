@@ -12,7 +12,7 @@ use App\ProductInCategory;
 class CategoryController extends Controller
 {
     public function admin_list() {
-        $categories = Category::orderBy('created_at', 'desc')->paginate(15);
+        $categories = Category::orderBy('id', 'desc')->paginate(15);
         foreach($categories as $key => $category) {
             $categories[$key]->totalProduct = ProductInCategory::where('category_id', '=', $category->id)->count();
         }
@@ -67,5 +67,13 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect('admin/categories')->with('success', 'Update thành công !!!');  
+    }
+    public function delete($id) {
+        $category = Category::find($id);
+        if (!$category) {
+            return back()->with('fail', 'Chuyên mục không tồn tại !!!');
+        }
+        $category->delete();
+        return back()->with('success', 'Xóa thành công !!!');
     }
 }

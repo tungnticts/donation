@@ -10,4 +10,7 @@ class Package extends Model
     public function project() {
         return $this->belongsTo('App\Project', 'project_id');
     }
+    public function order() {
+        return $this->hasMany('App\Order', 'package_id');
+    }
 }

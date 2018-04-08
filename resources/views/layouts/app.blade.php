@@ -24,7 +24,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{{ asset('js/perfect-scrollbar.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
-    <script src="{{ asset('lib/color_picker/jpicker-1.1.6.min.js') }}"></script>
 </head>
 <body>
     <div class="be-wrapper be-fixed-sidebar">
@@ -114,18 +113,8 @@
                   <li class="divider">Menu</li>
                   <li class="active"><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                   </li>
-                <li class="parent"><a href="{{ route('product.product_list') }}"><i class="icon mdi mdi-face"></i><span>Danh sách sản phẩm</span></a></li>
-                  <li class="parent"><a href="charts.html"><i class="icon mdi mdi-chart-donut"></i><span>Charts</span></a>
-                    <ul class="sub-menu">
-                      <li><a href="charts-flot.html">Flot</a>
-                      </li>
-                      <li><a href="charts-sparkline.html">Sparklines</a>
-                      </li>
-                      <li><a href="charts-chartjs.html">Chart.js</a>
-                      </li>
-                      <li><a href="charts-morris.html">Morris.js</a>
-                      </li>
-                    </ul>
+                <li class="parent"><a href="{{ route('product.product_list') }}"><i class="icon mdi mdi-face"></i><span>DS sản phẩm</span></a></li>
+                  <li class="parent"><a href="{{ route('category.admin_list') }}"><i class="icon mdi mdi-chart-donut"></i><span>DS chuyên mục sản phẩm</span></a>
                   </li>
                   <li class="parent"><a href="#"><i class="icon mdi mdi-dot-circle"></i><span>Forms</span></a>
                     <ul class="sub-menu">
