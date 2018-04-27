@@ -22,7 +22,10 @@ Route::get('/logout', 'UserController@logout')->name('logout');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/projects', 'ProjectController@index')->name('project.list');
-Route::get('/projects/{id}', 'ProjectController@detail')->name('project.detail');
+// Route::get('/projects/{id}', 'ProjectController@detail')->name('project.detail');
+// Route::get('/projects/{}{id}', 'ProjectController@detail')->name('project.detail');
+Route::get('/projects/{slug}-{id}.html', 'ProjectController@detail')->where('slug', '[A-Za-z-0-9]+')->where('id', '^\d+$')->name('project.detail');
+Route::get('/products', 'ProductController@list')->name('product.list');
 
 Route::get('checkout', 'CartController@check_out')->name('cart.check_out');
 Route::post('pay_to_vtc', 'CartController@pay_to_vtc')->name('cart.process');
@@ -54,5 +57,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/packages/create', 'ProjectController@create_package')->name('project.create_package')->middleware('auth');
     Route::post('/packages/store', 'ProjectController@store_package')->name('project.store_package')->middleware('auth');
     Route::get('/packages', 'ProjectController@packages_list')->name('project.packages_list')->middleware('auth');
-    Route::get('/orders', 'OrderController@index')->name('project.index')->middleware('auth');
+    Route::get('/orders', 'OrderController@index')->name('order.index')->middleware('auth');
+    Route::get('/packages/edit', 'ProjectController@edit_package')->name('project.edit_package')->middleware('auth');
+    Route::post('/packages/save_edit', 'ProjectController@save_edit_package')->name('project.save_edit_package')->middleware('auth');
 });

@@ -14,7 +14,7 @@ class ProjectController extends Controller
         $projects = Project::orderBy('id', 'desc')->paginate(9);
         return view('project.index', ['projects' => $projects]);
     }
-    public function detail($id) {
+    public function detail($slug, $id) {
         $project = Project::findOrFail($id);
         // dd($project->package()->get());
         $packages = $project->package()->get();
@@ -92,8 +92,15 @@ class ProjectController extends Controller
             'aim_money' => 'required|numeric',
             'summary' => 'required',
             'content' => 'required',
+            'thumbnail' => 'required',
+            'image1' => 'required',
+            'image2' => 'required',
+            'image3' => 'required',
+            'image4' => 'required',
+            'image5' => 'required',
             'end_at' => 'required',
         ]);
+
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
@@ -103,9 +110,12 @@ class ProjectController extends Controller
         $project->aim_money = $request->input('aim_money');
         $project->summary = $request->input('summary');
         $project->content = $request->input('content');
-        if ($request->input('thumbnail')) {
-            $project->thumbnail = $request->input('thumbnail');
-        }
+        $project->image1 = $request->input('image1');
+        $project->image2 = $request->input('image2');
+        $project->image3 = $request->input('image3');
+        $project->image4 = $request->input('image4');
+        $project->image5 = $request->input('image5');
+        $project->thumbnail = $request->input('thumbnail');
         $project->end_at = $request->input('end_at');
         $project->user_id = Auth::id();
         $project->save();
@@ -130,7 +140,6 @@ class ProjectController extends Controller
         return view('projects.create_package', ['project' => $project, 'quantity' => $quantity]);
     }
     public function store_package(Request $request) {
-        // dd($request);
         $project = Project::find($request->input('project_id'));
         if (!$project) {
             return back()->with('error', 'Project không tồn tại');
@@ -156,5 +165,26 @@ class ProjectController extends Controller
         $packages = Package::where('project_id', '=', $project->id)->get();
         // dd($packages);
         return view('projects.packages_list', ['packages' => $packages]);
+    }
+    public function edit_package(Request $request) {
+        $package = Package::findOrFail($request->input('id'));
+        if (!$package) {
+            return back()->with('error', 'Package không tồn tại');
+        }
+        return view('projects.edit_package', ['package' => $package]);
+    }
+    public function save_edit_package(Request $request) {
+        $package = Package::findOrFail($request->input('id'));
+        if (!$package) {
+            return back()->with('error', 'Package không tồn tại');
+        }
+        $package->title = $request->input('title');
+        $package->price = $request->input('price');
+        $package->quantity = $request->input('quantity');
+        $package->type = $request->has('type') ? 1 : 0;
+        $package->save();
+        $project = $package->project()->first();
+        // return back()->with('Success', 'Update thành công');
+        return redirect('admin/packages?project_id='.$project->id)->with('Success', 'Update thành công');
     }
 }

@@ -54,14 +54,74 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh</label>
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Thumbnail</label>
                 <div class="col-12 col-sm-8 col-lg-6">
                     <p>
                       <img id="holder" class="img-thumbnail" name="thumbnail" style="max-width:100px;" src="{{ $project->thumbnail }}">
                     </p>
                     <p>
-                      <input id="thumbnail" class="form-control" type="hidden" name="thumbnail">
+                      <input id="thumbnail" class="form-control" type="hidden" name="thumbnail" value="{{ $project->thumbnail }}">
                       <button class="btn btn-primary" data-input="thumbnail" id="lfm" data-preview="holder"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh 1</label>
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <p>
+                        <img id="image1_preview" class="img-thumbnail" name="image1_preview" style="max-width:100px;" src="{{ $project->image1 }}">
+                    </p>
+                    <p>
+                        <input id="image1" class="form-control" type="hidden" name="image1" value="{{ $project->image1 }}">
+                        <button class="btn btn-primary" data-input="image1" id="image1_btn" data-preview="image1_preview"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh 2</label>
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <p>
+                        <img id="image2_preview" class="img-thumbnail" name="image2_preview" style="max-width:100px;" src="{{ $project->image2 }}">
+                    </p>
+                    <p>
+                        <input id="image2" class="form-control" type="hidden" name="image2" value="{{ $project->image2 }}">
+                        <button class="btn btn-primary" data-input="image2" id="image2_btn" data-preview="image2_preview"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh 3</label>
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <p>
+                        <img id="image3_preview" class="img-thumbnail" name="image3_preview" style="max-width:100px;" src="{{ $project->image3 }}">
+                    </p>
+                    <p>
+                        <input id="image3" class="form-control" type="hidden" name="image3" value="{{ $project->image3 }}">
+                        <button class="btn btn-primary" data-input="image3" id="image3_btn" data-preview="image3_preview"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh 4</label>
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <p>
+                        <img id="image4_preview" class="img-thumbnail" name="image4_preview" style="max-width:100px;" src="{{ $project->image4 }}">
+                    </p>
+                    <p>
+                        <input id="image4" class="form-control" type="hidden" name="image4" value="{{ $project->image4 }}">
+                        <button class="btn btn-primary" data-input="image4" id="image4_btn" data-preview="image4_preview"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputDisabled3" class="col-12 col-sm-3 col-form-label text-sm-right">Ảnh 5</label>
+                <div class="col-12 col-sm-8 col-lg-6">
+                    <p>
+                        <img id="image5_preview" class="img-thumbnail" name="thumbnail" style="max-width:100px;" src="{{ $project->image5 }}">
+                    </p>
+                    <p>
+                        <input id="image5" class="form-control" type="hidden" name="image5" value="{{ $project->image5 }}">
+                        <button class="btn btn-primary" data-input="image5" id="image5_btn" data-preview="image5_preview"><i class="mdi mdi-upload"></i><span> Browse files...</span></button>
                     </p>
                 </div>
             </div>
@@ -97,11 +157,16 @@
   };
     $('textarea').ckeditor(options);
     $('#lfm').filemanager('image');
+    $('#image1_btn').filemanager('image');
+    $('#image2_btn').filemanager('image');
+    $('#image3_btn').filemanager('image');
+    $('#image4_btn').filemanager('image');
+    $('#image5_btn').filemanager('image');
 
     var dateNow = new Date();
-    $(function () {
+     $(function () {
         $('#datetimepicker1').datetimepicker({
-          format: 'Y/m/D H:mm:ss'
+          format: 'YYYY/MM/DD HH:mm:ss'
         });
     });
 </script>

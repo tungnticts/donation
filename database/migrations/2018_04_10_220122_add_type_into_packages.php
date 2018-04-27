@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ChangeNullableImagesInProjects extends Migration
+class AddTypeIntoPackages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeNullableImagesInProjects extends Migration
      */
     public function up()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->string('image1')->nullable();
+        Schema::table('packages', function (Blueprint $table) {
+            $table->integer('type')->default(0);
         });
     }
 
@@ -25,7 +25,7 @@ class ChangeNullableImagesInProjects extends Migration
      */
     public function down()
     {
-        Schema::table('projects', function (Blueprint $table) {
+        Schema::table('packages', function (Blueprint $table) {
             //
         });
     }

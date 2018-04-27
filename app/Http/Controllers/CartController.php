@@ -9,6 +9,7 @@ use App\Cart;
 use App\Order;
 use Validator;
 use Illuminate\Support\Facades\Log;
+use DateTime;
 
 class CartController extends Controller
 {
@@ -24,6 +25,12 @@ class CartController extends Controller
         $package = Package::find($request->input('package_id'));
         if (!$package) {
             return back()->with('error', 'Package không tồn tại');
+        }
+        $project = $package->project()->first();
+        $now = new DateTime();
+        $end_date = new DateTime($project->end_at);
+        if ($end_date <= $now) {
+            return back()->with('error', 'Đã hết hạn ủng hộ');
         }
         $total = Order::where('package_id', '=', $package->id)->count();
         if ($total >= $package->quantity) {
@@ -81,7 +88,7 @@ class CartController extends Controller
         $receiver_account = '0963465816';
         $reference_number = $order->id;
         $transaction_type = 'sale';
-        $url_return = 'http://localhost/callback';
+        $url_return = 'http://hoavanvietnam.com/callback';
         $website_id = '36085';
         $security_code = 'Asdfghjkl*123456789';
         $signature_no_hash = $amount.'|'.$currency.'|'.$payment_type.'|'.$receiver_account.'|'.$reference_number.'|'.$url_return.'|'.$website_id.'|'.$security_code;
@@ -117,7 +124,6 @@ class CartController extends Controller
         $signature_no_hash = $amount.'|'.$message.'|'.$payment_type.'|'.$reference_number.'|'.$status.'|'.$trans_ref_no.'|'.$website_id.'|'.$security_code;
         
         $signature = strtoupper(hash('sha256', $signature_no_hash));
-        // dd($signature);
         if ($signature !== $request->input('signature')) {
             return redirect('/projects')->with('fail', 'Sai chữ kí thanh toán');
         }

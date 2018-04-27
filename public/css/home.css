@@ -1,0 +1,38 @@
+.footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 13px;
+}
+.footer img {
+  height: 80px;
+}
+.left {
+  margin-left: 10px;
+}
+
+.text_right {
+  text-align: right;
+}
+
+.text_size_10 {
+  font-size: 12px;
+}
+
+.margin_bottom_10 {
+  margin-bottom: 5px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.margin_bottom_15 {
+  margin-bottom: 15px;
+}
+.margin_bottom_30 {
+  margin-bottom: 30px;
+}
+.description {
+  margin-bottom: 20px;
+}

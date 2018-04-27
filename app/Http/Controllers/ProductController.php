@@ -21,8 +21,13 @@ class ProductController extends Controller
         // $this->middleware('guest');
     }
     
-    public function products_list(Request $request) {
-        return view('product.list');
+    public function list($slug, $category, $page) {
+        $currentPage = 3;
+        \Illuminate\Pagination\AbstractPaginator::currentPageResolver(function() use ($currentPage) {
+            return $currentPage;
+        });        
+        $products = Product::paginate(15);
+        return view('products.list', ['products' => $products]);
     }
 
     public function admin_product_list(Request $request) {

@@ -1,46 +1,23 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!--google-->
+    <meta name="Description" CONTENT="@yield('description')">
+    <!--facebook-->
+    <meta property="og:url" content="@yield('url')" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="@yield('title')" />
+    <meta property="og:description"        content="@yield('description')" />
+    <meta property="og:image"              content="@yield('image')" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-
-    <title>Hoa văn đại Việt</title>
-    <style>
-        .left {
-            margin-left: 10px;
-        }
-
-        .text_right {
-            text-align: right;
-        }
-
-        .text_size_10 {
-            font-size: 12px;
-        }
-
-        .margin_bottom_10 {
-            margin-bottom: 5px;
-        }
-
-        .italic {
-            font-style: italic;
-        }
-
-        .margin_bottom_15 {
-            margin-bottom: 15px;
-        }
-        .margin_bottom_30 {
-            margin-bottom: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
+    <title>@yield('title')</title>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light margin_bottom_15">
         <div class="container">
@@ -60,33 +37,35 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">Gây quỹ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
+                            Sản phẩm
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Áo</a>
+                            <a class="dropdown-item" href="#">Quần</a>
+                            <a class="dropdown-item" href="#">Ốp điện thoại</a>
                         </div>
                     </li>
                 </ul>
             </div>
-            <form class="form-inline">
-                <button class="btn btn-sm btn-outline-success" type="button">Main button</button>
-                <button class="btn btn-sm btn-outline-secondary left" type="button">Smaller button</button>
-            </form>
         </div>
     </nav>
     <div class="container">
+        <div style="text-align: center; margin: 20px 0">
+            <img src="{{ asset('images/728x90.png') }}">
+        </div>
         @yield('content')
+        
     </div>
-
+    <div class="footer">
+        <p><img src="{{ asset('images/dathongbao.png') }}"></p>
+        <p>Số ĐKKD 1234abcxyz do UBND Q. 10 cấp ngày 11/04/2017 - Đại diện: Nguyễn Thanh Hiếu</p>
+        <p>Địa chỉ: 23 Lạc Trung, Phường Thanh Nhàn, Quận Hai Bà Trưng, Thành phố Hà Nội</p>
+        <p>SDT: 099.888.6886 - Email: contact@hoavandaiviet.com</p>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

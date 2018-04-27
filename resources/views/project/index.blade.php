@@ -49,7 +49,7 @@
                 <span class="col-md-6 text_size_10">Còn {{ date_diff(date_create(date('Y/m/d')), date_create($project->end_at))->days }} ngày </span>
                     <span class="col-md-6 text_size_10 text_right">{{ $total_donating }} người ủng hộ</span>
                 </div>
-                <a href="{{ route('project.detail', [ $project->id ]) }}" class="btn btn-primary btn-sm" style="float:right">Xem tiếp...</a>
+                <a href="{{ route('project.detail', [ 'slug' => str_slug($project->name, '-'), 'id' => $project->id ]) }}" class="btn btn-primary btn-sm" style="float:right">Xem tiếp...</a>
             </div>
         </div>
     </div>

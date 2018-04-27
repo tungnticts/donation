@@ -1,6 +1,34 @@
 @extends('layouts.home')
-
+@section('title', $project->name)
+@section('url', route('project.detail', [ 'slug' => str_slug($project->name, '-'), 'id' => $project->id ]))
+@section('description', $project->summary)
+@section('image', asset($project->thumbnail))
 @section('content')
+<style>
+    .card-body p:has(> img) {
+        text-align: center;
+    }
+</style>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        @if (session('success'))
+        <div role="alert" class="alert alert-success alert-icon alert-dismissible">
+            <div class="icon"><span class="mdi mdi-check"></span></div>
+            <div class="message">
+                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="mdi mdi-close"></span></button><strong>Success!</strong> {{ session('success') }}
+            </div>
+        </div>
+        @endif
+        @if (session('error'))
+        <div role="alert" class="alert alert-danger alert-icon alert-dismissible">
+            <div class="icon"><span class="mdi mdi-close-circle-o"></span></div>
+            <div class="message">
+                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="mdi mdi-close"></span></button><strong>Error!</strong> {{ session('error') }}
+            </div>
+        </div>
+        @endif
+    </div>
+</div>
 <div class="row">
     <h2 class="col-md-12 card-title" style="margin-top:0.75rem;">{{ $project->name }}</h2>
 </div>
